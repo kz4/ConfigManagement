@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DevProdConfigTest
 {
@@ -10,11 +6,19 @@ namespace DevProdConfigTest
     {
         static void Main(string[] args)
         {
-            ReadConfig config = new ReadConfig(Config.Development);
+            Config setting = Config.Development;
+#if (DEBUG)
+            setting = Config.Development;
+#else
+            setting = Config.Production;
+#endif
+
+            ReadConfig config = new ReadConfig(setting);
             Console.WriteLine(config.Test1);
             Console.WriteLine(config.Test2);
             Console.WriteLine(config.Test3);
             Console.WriteLine(config.Test4);
+            Console.Read();
         }
     }
 }
